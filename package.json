@@ -1,0 +1,15 @@
+{
+  "name": "socket-chat-example",
+  "version": "0.0.1",
+  "description": "my first socket.io app",
+  "dependencies": {
+    "bower": "^1.8.4",
+    "express": "^4.15.2",
+    "node-gps-heading": "^1.0.1",
+    "prismjs": "^1.15.0",
+    "socket.io": "^1.7.3"
+  },
+  "scripts": {
+    "start": "node index.js"
+  }
+}

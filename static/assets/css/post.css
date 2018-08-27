@@ -1,0 +1,194 @@
+h1, h2, h3{
+
+    font-family: 'Open Sans', sans-serif;
+    
+}
+
+.container-fluid{
+    width: 100%;
+    /* background-color: grey; */
+}
+
+#title h1{
+    padding-left: 15%;
+    padding-right: 15%;
+}
+
+
+#post_container{
+    margin-top: 30px;
+    padding-left: 22%;
+    padding-right: 22%;
+}
+#post_container #heading{
+    /* background-color: red; */
+
+}
+#post_container #heading h3, h2{
+    /* background-color: red; */
+    font-size: 1.5em;
+}
+
+#post_container #paragraph{
+    /* background-color: red; */
+    font-size: 1em;
+}
+#post_container pre{
+    /* background-color: red; */
+    /* width: 100px;
+    height: 100px; */
+    /* font-size: 1em; */
+    /* background-color: #4F5D75; */
+    font-family: 'Open Sans', sans-serif;
+}
+#post_container #math{
+
+}
+
+#classification_image{
+    object-fit: contain;
+    height: 15em;
+    background-position: 100% 100%;
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-image: url("/images/animal_classification.png");
+    margin-top: 2em;
+    margin-bottom: 2em;
+    width: 80%;
+}
+
+
+
+
+
+#post_container #table{
+    max-width: 1000px;
+    margin-right: auto;
+  margin-left: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* min-height: 100vh; */
+}
+
+#runnable {
+    /* margin-top: 30px;
+    padding-left: 22%;
+    padding-right: 22%; */
+
+
+}
+.thebelab-cell {
+  font-family:
+  max-width: 80ex;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2em;
+  margin-bottom: 2em;
+
+
+}
+
+.thebelab-cell {
+  border: 2px solid #aaa;
+  border-radius: 4px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+.thebelab-cell:focus-within {
+  border-color: green;
+}
+
+
+.jp-OutputArea > :first-child {
+  padding-top: 0.5em;
+  border-top: 1px solid #aaa;
+}
+
+.CodeMirror-scroll {
+  height: auto;
+}
+
+.CodeMirror {
+  background-color: transparent;
+}
+
+
+.CodeMirror.CodeMirror-focused {
+  // background-color: white;
+}
+
+/* no prompts */
+.jp-OutputPrompt {
+  display: none;
+}
+
+.thebelab-button.thebelab-run-button{
+    font-family: 'Open Sans', sans-serif;
+    border-radius: 15px;
+    font-size: 1em;
+
+   border-style: solid;
+
+}
+
+.thebelab-button.thebelab-restart-button{
+    border-radius: 15px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+
+
+.table {
+  width: 100%;
+  border: 1px solid #EEEEEE;
+}
+
+.table-header {
+  display: flex;
+  width: 100%;
+  background: #000;
+  padding: 1px 0;
+}
+
+.table-row {
+  display: flex;
+  width: 100%;
+  padding: 5px 0;
+}
+.table-row:nth-of-type(odd) {
+  background: #EEEEEE;
+}
+
+.table-data, .header__item {
+  flex: 1 1 20%;
+  text-align: center;
+}
+
+.header__item {
+  text-transform: uppercase;
+}
+
+.filter__link {
+  color: white;
+  text-decoration: none;
+  position: relative;
+  display: inline-block;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+.filter__link::after {
+  content: '';
+  position: absolute;
+  right: -18px;
+  color: white;
+  font-size: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.filter__link.desc::after {
+  content: '(desc)';
+}
+.filter__link.asc::after {
+  content: '(asc)';
+}
