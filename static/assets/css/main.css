@@ -1,4 +1,4 @@
-@-webkit-keyframes AnimationName {
+ @-webkit-keyframes AnimationName {
     0%{background-position:50% 0%}
     50%{background-position:51% 100%}
     100%{background-position:50% 0%}
@@ -19,48 +19,13 @@ h1, h2, h3{
     font-family: 'Open Sans', sans-serif;
 
 }
-
-.container-fluid{
-    width: 100%;
-    /* background-color: grey; */
+#splash_subtext{
+    font-size: 2em;
 }
 
-#title h1{
-
-    padding-left: 15%;
-    padding-right: 15%;
-    font-weight: 1em;
-}
-
-
-.jumbotron-fluid{
-    color: white;
-    background: linear-gradient(182deg, #ff6f59, #ff6b6b);
-
-
-    -webkit-animation: AnimationName 43s ease infinite;
-    -moz-animation: AnimationName 43s ease infinite;
-    animation: AnimationName 43s ease infinite;
-
-    background-size: 400% 400%;
-
-
-    height: 30em;
-    border: 1px solid #EEEEEE;
-
-}
-
-.jumbotron-fluid h1, h2, h3{
-
-}
-
-#post_container{
-    margin-top: 30px;
-    padding-left: 30%;
-    padding-right: 30%;
-}
-
-
-#post_container #post{
-    /* background-color: red; */
+#splash2{
+    height: 25vh;
+    min-height: 100px;
+    background-color: transparent;
+    background-image: url("/images/card-1.jpg");
 }

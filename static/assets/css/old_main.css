@@ -1,0 +1,116 @@
+ @-webkit-keyframes AnimationName {
+    0%{background-position:50% 0%}
+    50%{background-position:51% 100%}
+    100%{background-position:50% 0%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:50% 0%}
+    50%{background-position:51% 100%}
+    100%{background-position:50% 0%}
+}
+@keyframes AnimationName {
+    0%{background-position:50% 0%}
+    50%{background-position:51% 100%}
+    100%{background-position:50% 0%}
+}
+
+h1, h2, h3{
+
+    font-family: 'Open Sans', sans-serif;
+
+}
+
+.container-fluid{
+    width: 100%;
+
+}
+#features{
+
+
+    margin-top: 2em;
+    border: 1px solid black;
+    height: 10em;
+    text-align: center;
+
+
+}
+
+
+
+
+#title h1{
+
+    padding-left: 15%;
+    padding-right: 15%;
+    font-weight: 1em;
+}
+
+
+.jumbotron-fluid{
+    color: white;
+    background: linear-gradient(182deg, #ff6f59, #ff6b6b);
+
+
+    -webkit-animation: AnimationName 23s ease infinite;
+    -moz-animation: AnimationName 23s ease infinite;
+    animation: AnimationName 23s ease infinite;
+
+    background-size: 400% 400%;
+
+    height: 100vh;
+
+
+    border: 1px solid #EEEEEE;
+
+}
+
+.jumbotron-fluid h1, h2, h3{
+
+}
+.thebelab-cell {
+  border: 2px solid #aaa;
+  border-radius: 4px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  font-family: 'Source Code Pro', monospace;
+
+}
+
+.thebelab-cell:focus-within {
+  border-color: green;
+}
+
+.jp-OutputArea > :first-child {
+  padding-top: 0.5em;
+  border-top: 1px solid #aaa;
+}
+
+.CodeMirror-scroll {
+  height: auto;
+}
+
+.CodeMirror {
+  background-color: transparent;
+}
+
+
+.CodeMirror.CodeMirror-focused {
+    // background-color: white;
+}
+
+.jp-OutputPrompt {
+  display: none;
+}
+
+
+
+#post_container{
+    margin-top: 30px;
+    padding-left: 30%;
+    padding-right: 30%;
+}
+
+
+#post_container #post{
+     background-color: red;
+}

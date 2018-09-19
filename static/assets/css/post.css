@@ -1,7 +1,7 @@
 h1, h2, h3{
 
     font-family: 'Open Sans', sans-serif;
-    
+
 }
 
 .container-fluid{
@@ -44,6 +44,16 @@ h1, h2, h3{
 #post_container #math{
 
 }
+
+#status{
+    margin-top: 1em;
+}
+
+#status span{
+    margin-top: 1em;
+}
+
+
 
 #classification_image{
     object-fit: contain;
@@ -94,6 +104,7 @@ h1, h2, h3{
   border-radius: 4px;
   margin-top: 8px;
   margin-bottom: 8px;
+  font-family: 'Source Code Pro', monospace;
 }
 .thebelab-cell:focus-within {
   border-color: green;
