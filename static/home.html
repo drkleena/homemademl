@@ -114,29 +114,34 @@
   <div class="welcome d-flex justify-content-center flex-column" id = "splash2">
   </div> -->
   <div id="our-services" class="our-services section py-4">
+
       <h3 class="section-title text-center my-5">Lessons</h3>
       <div class="features py-4 mb-4">
-        <div class="container">
-          <div class="card my-4">
-            <div class="card-body">
-             <a href="/classification.html">Introduction to Classification</a>
-            </div>
-          </div>
-          <div class="card my-4">
-            <div class="card-body">
-             <a href="/naive_bayes.html">Naive Bayes</a>
-            </div>
-          </div>
+        <div class="container" id = "Lessons">
+            <div class="card my-4">
+              <div class="card-body">
+               <h3>Chapter One</h3>
+              </div>
+              <div class="card my-4 mx-4">
+                <div class="card-body" style = "font-size:1.5em;">
+                 <a href="/classification.html">Classification</a>
+                </div>
 
-          <div class="card my-4">
-            <div class="card-body">
-             <a href="/naive_bayes.html">Evaluation</a>
+              </div>
+              <div class="card my-4 mx-4">
+                <div class="card-body" style = "font-size:1.5em;">
+                 <a href="/naive_bayes.html">Naive Bayes</a>
+                </div>
             </div>
+            <div class="card my-4 mx-4">
+              <div class="card-body" style = "font-size:1.5em;">
+               <a href="/naive_bayes.html">Model Evaluation</a>
+              </div>
           </div>
         </div>
+
       </div>
     </div>
-
   <footer>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
@@ -217,7 +222,7 @@
           var period = elements[i].getAttribute('data-period');
           if (toRotate) {
             new TxtRotate(elements[i], JSON.parse(toRotate), period);
-          }
+        }f
         }
         // INJECT CSS
         var css = document.createElement("style");

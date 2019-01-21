@@ -29,9 +29,9 @@ h1, h2, h3{
     font-size: 1.5em;
 }
 
-#post_container #paragraph{
+#post_container #paragraph h3, h2{
     /* background-color: red; */
-    font-size: 1em;
+    font-size: 1.5em;
 }
 #post_container pre{
     /* background-color: red; */
@@ -39,10 +39,10 @@ h1, h2, h3{
     height: 100px; */
     /* font-size: 1em; */
     /* background-color: #4F5D75; */
-    font-family: 'Open Sans', sans-serif;
+    /* font-family: 'Open Sans', sans-serif; */
 }
-#post_container #math{
-
+#post_container #math h3, h2{
+    font-size: 1.5em;
 }
 
 #status{
@@ -80,6 +80,12 @@ h1, h2, h3{
   align-items: center;
   /* min-height: 100vh; */
 }
+
+container h3 {
+    font-size: 1.5em;
+}
+
+
 
 #runnable {
     /* margin-top: 30px;
@@ -126,7 +132,7 @@ h1, h2, h3{
 
 
 .CodeMirror.CodeMirror-focused {
-  // background-color: white;
+  background-color: transparent;
 }
 
 /* no prompts */
@@ -136,7 +142,7 @@ h1, h2, h3{
 
 .thebelab-button.thebelab-run-button{
     font-family: 'Open Sans', sans-serif;
-    border-radius: 15px;
+    /* border-radius: 15px; */
     font-size: 1em;
 
    border-style: solid;
@@ -144,7 +150,7 @@ h1, h2, h3{
 }
 
 .thebelab-button.thebelab-restart-button{
-    border-radius: 15px;
+    /* border-radius: 15px; */
     font-family: 'Open Sans', sans-serif;
 }
 
