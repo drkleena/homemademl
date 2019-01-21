@@ -1,8 +1,18 @@
-h1, h2, h3{
+h1{
 
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Hind', sans-serif;
 
 }
+
+h3{
+    font-family: 'Palanquin', sans-serif;
+}
+
+p{
+    font-family: 'Open-Sans', sans-serif;
+}
+
+
 
 .container-fluid{
     width: 100%;
@@ -10,29 +20,51 @@ h1, h2, h3{
 }
 
 #title h1{
-    padding-left: 15%;
-    padding-right: 15%;
+    /* padding-left: 15%;
+    padding-right: 15%; */
 }
 
 
 #post_container{
-    margin-top: 30px;
-    padding-left: 22%;
-    padding-right: 22%;
+    margin-top: 10px;
+    /* padding-left: 22%;
+    padding-right: 22%; */
+
 }
 #post_container #heading{
-    /* background-color: red; */
+    margin-bottom: 2.5em;
+
 
 }
-#post_container #heading h3, h2{
-    /* background-color: red; */
-    font-size: 1.5em;
+#post_container #heading h1{
+    font-size: 3.8em;
+    font-style: bold;
 }
 
-#post_container #paragraph h3, h2{
-    /* background-color: red; */
-    font-size: 1.5em;
+
+
+#post_container #paragraph{
+
+    margin-bottom: 1.5em;
 }
+
+#post_container #paragraph h3{
+
+    font-size: 2em;
+    margin-bottom: 1.5em;
+    font-weight: bold;
+}
+
+
+
+
+
+
+
+
+
+
+
 #post_container pre{
     /* background-color: red; */
     /* width: 100px;

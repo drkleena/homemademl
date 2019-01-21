@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Palanquin" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Hind" rel="stylesheet">
+
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link href="assets/css/prism.css" rel="stylesheet"/>
@@ -33,15 +37,15 @@
             kernelOptions: {
               name: "python3",
             },
-            requestKernel: true
+            requestKernel: false
           }
         </script>
 
     <script>
       window.onload = function () {
-        thebe_place_activate_button();
-        thebe_activate_button_function();
-        thebe_activate_cells();
+        // thebe_place_activate_button();
+        // thebe_activate_button_function();
+        // thebe_activate_cells();
       };
     </script>
 
@@ -52,13 +56,40 @@
 <body>
 
 
+    <nav class="navbar navbar-expand-lg navbar-light pt-4 px-0 mx-5">
+      <a class="navbar-brand" href="/">
+        Homemade ML
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
 
+        </ul>
+
+        <!-- <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="https://twitter.com/DesignRevision"><i class="fa fa-twitter"></i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://www.facebook.com/designrevision"><i class="fa fa-facebook"></i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://dribbble.com/hisk"><i class="fa fa-dribbble"></i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/designrevision"><i class="fa fa-github"></i></a>
+          </li>
+        </ul> -->
+      </div>
+    </nav>
     <div class=".container-fluid" style="width: 100%;">
         <div class="container">
             <div class="row">
-                <div class="col-1">
-                    <a href = "/"><i class="fas fa-long-arrow-alt-left fa-5x" style = "margin-left : 3px; position: fixed;"></i></a>
-                </div>
+                <!-- <div class="col-1">
+                    <a href = "/"><i class="fas fa-long-arrow-alt-left fa-5x" style = "margin-left: 3px; margin-right:10em; position: fixed;"></i></a>
+                </div> -->
                 <div class="col" id = "title">
 
                 </div>
@@ -73,15 +104,13 @@
     <div class=".container-fluid" id = "post_container" style="width: 100%;background-color:white;">
 
         <div class="container" id = heading>
-
             <h1>Naive Bayes</h1>
-            <br>
-            <h3>Introduction</h3>
-            <br>
 
         </div>
 
         <div class="container" id = paragraph>
+
+            <h3>A good place to start</h3>
 
             <p>The Naïve Bayes classification algorithm
                 is a simple yet powerful model that is
@@ -97,9 +126,10 @@
         </div>
 
 
-        <div class="container" id = math>
+        <div class="container" id = paragraph>
+
             <h3>How it works</h3>
-            <br>
+
             <p>For a given instance/row in our dataset, we're trying to figure out which class it belongs to.
                 Mathemtically we want to know the probability of observing a particular class given our instance in question.
                 This means that for all possible classes, we want to know their respective probabilities and classify the instance by the most probable class.
@@ -127,8 +157,12 @@
 
             $$\widehat{C} = argmax_{c_j\in C} P(x_1, x_2, x_3, ... , x_n|c_j)*P(c_j)$$
 
-            <h3>The 'naive' part</h3>
-            <br>
+            </div>
+
+
+            <div class="container" id = paragraph>
+            <h3>The 'Naive' Part</h3>
+
 
             <p>We can't directly calculate \(P(x_1, x_2, x_3, ... , x_n|c_j)\), so we do something 'dumb',
                 we assume that all our instance attributes are
@@ -145,6 +179,9 @@
             $$≈\prod_{i} P(x_i|c_j)$$
 
 
+            </div>
+
+            <div class="container" id = paragraph>
             <h3>Putting it all together</h3>
             <br>
 
@@ -159,9 +196,11 @@
                     <li>Repeat for all possible class labels</li>
                 </ol>
             </p>
+
+            </div>
+        <div class="container" id = paragraph>
         <h3>Lets try it out</h3>
-        <br>
-        <div class="container" id = table>
+
             <div class="table">
     		    <div class="table-header">
         			<div class="header__item"><a id="name" class="filter__link" href="#">Headache</a></div>
@@ -219,11 +258,12 @@
     	    </div>
 
 
-        </div>
+
+    </div>
+
+        <div class="container" id = paragraph>
         <h3>Calculating our priors and posteriors per class</h3>
         <br>
-    </div>
-        <div class="container" id = table>
             <div class="table">
     		    <div class="table-header">
         			<div class="header__item"><a id="name" class="filter__link" href="#">Flu</a></div>
@@ -279,9 +319,7 @@
 
         		</div>
     	    </div>
-
         </div>
-
 
         <div class="container" id = paragraph>
 
@@ -320,6 +358,8 @@
 
 
             <p><b>Classification Result:</b> Our model says the patient has a cold</p>
+        </div>
+        <div class="container" id = paragraph>
 
             <h3>One Small Problem</h3>
             <p>We run into a small problem when we try to classify instances that contain attribute value pairs
@@ -355,7 +395,13 @@
                 mean we could be throwing away alot of useful information. The solution is to apply probabilistic smoothing.
             </p>
 
+        </div>
 
+
+
+
+
+        <div class = "container" id = runnable>
             <h3>Smoothing</h3>
 
             <p>Firstly the most simple type of Smoothing is called Epsilon Smoothing</p>
@@ -374,18 +420,18 @@
 
         </div>
 
+    </div>
 
+            <div class = "container" id = runnable>
 
-
-        <div class = "container" id = runnable>
             <p>Firstly we'll import the required modules and prepare the data for processing</p>
              <pre data-executable="true" data-language="python"># Our imports go here
 %cd Chapter-1/Naive-Bayes
 import pandas as pd
 from NaiveBayes import *
             </pre>
-        </div>
 
+        </div>
 
         <div class = "container" id = runnable>
              <pre data-executable="true" data-language="python"># give our csv data some headers
@@ -534,8 +580,6 @@ predicted_dataframe
 simple_accuracy = np.mean(predicted_dataframe["class"] == predicted_dataframe["predicted
 print (str(simple_accuracy)+"%")
         </pre>
-
-
 
 
 
