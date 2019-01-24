@@ -22,35 +22,30 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- THEBELAB STUFF -->
-        <script type="text/javascript" src="https://unpkg.com/thebelab@^0.3.0"></script>
+    <script type="text/javascript" src="https://unpkg.com/thebelab@^0.3.0"></script>
 
-        <script src="assets/js/thebe_status_field.js" type="text/javascript" ></script>
+    <script src="assets/js/thebe_status_field.js" type="text/javascript" ></script>
 
-
-
-        <script type="text/x-thebe-config">
-          {
-            binderOptions: {
-              repo: "drkleena/HomeMadeML-Lesson-Material",
-              ref: "master"
-            },
+    <script type="text/x-thebe-config">
+    {
+        binderOptions: {
+            repo: "drkleena/HomeMadeML-Lesson-Material",
+            ref: "master"
+        },
             kernelOptions: {
-              name: "python3",
+                name: "python3",
             },
-            requestKernel: true
-          }
-        </script>
-
-    <script>
-      window.onload = function () {
-        thebe_place_activate_button();
-        thebe_activate_button_function();
-        thebe_activate_cells();
-      };
+        requestKernel: true
+    }
     </script>
 
-
-
+    <script>
+        window.onload = function () {
+            thebe_place_activate_button();
+            thebe_activate_button_function();
+            thebe_activate_cells();
+        };
+    </script>
 </head>
 
 <body>
@@ -94,12 +89,33 @@
 
                 </div>
                 <div class="col-1" id = "status">
-                    <p style = "position: fixed">Status: <span class="thebe_status_field"></span></p>
+                    <p>Status: <span class="thebe_status_field"></span></p>
                 </div>
           </div>
         </div>
 
     </div>
+    <!-- <div class="container">
+
+	<div class="timeline-item">
+		<h1></h1>
+		<p>
+
+		</p>
+	</div>
+
+	<div class="timeline-item">
+		<h1></h1>
+		<p>
+		</p>
+	</div>
+
+	<div class="timeline-item">
+		<h1></h1>
+		<p>
+		</p>
+	</div> -->
+
 
     <div class=".container-fluid" id = "post_container" style="width: 100%;background-color:white;">
 
@@ -396,11 +412,6 @@
             </p>
 
         </div>
-
-
-
-
-
         <div class = "container" id = runnable>
             <h3>Smoothing</h3>
 
@@ -578,14 +589,31 @@ predicted_dataframe
         <h3>How good is it?</h3>
         <pre data-executable="true" data-language="python">
 simple_accuracy = np.mean(predicted_dataframe["class"] == predicted_dataframe["predicted
-print (str(simple_accuracy)+"%")
+print (str(simple_accuracy*100)+"%")
         </pre>
 
 
 
 
 </div>
-
+<footer>
+  <nav class="navbar navbar-expand-lg">
+      <!-- ^^ navbar-dark bg-dark  -->
+    <div class="container">
+      <a class="navbar-brand" href="/">Homemade ML</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</footer>
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
 <!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/showdown/1.8.6/showdown.min.js'></script> -->
