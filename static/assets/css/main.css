@@ -32,3 +32,12 @@ h1, h2, h3{
     background-color: transparent;
     background-image: url("/images/card-1.jpg");
 }
+
+footer{
+    margin-bottom: 0px;
+    background-color: #5E7CE2;
+
+}
+footer a {
+    color: white;
+}

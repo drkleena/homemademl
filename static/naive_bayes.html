@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css?family=Palanquin" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Hind" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
 
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -45,16 +46,30 @@
             thebe_activate_button_function();
             thebe_activate_cells();
         };
+        window.onscroll = function() {myFunction()};
+
+        function myFunction() {
+          var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+          var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+          var scrolled = (winScroll / height) * 100;
+          document.getElementById("myBar").style.width = scrolled + "%";
+        }
     </script>
 </head>
 
 <body>
 
+    <div class="header">
+        <div class="progress-container">
+            <div class="progress-bar" id="myBar"></div>
+        </div>
+    </div>
 
     <nav class="navbar navbar-expand-lg navbar-light pt-4 px-0 mx-5">
       <a class="navbar-brand" href="/">
         Homemade ML
       </a>
+
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -62,12 +77,15 @@
         <ul class="navbar-nav">
 
         </ul>
-
-        <!-- <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="https://twitter.com/DesignRevision"><i class="fa fa-twitter"></i></a>
+              <div class="col-1" id = "status">
+                  <p style = "font-weight: 5px; font-size: 1rem">Status: </p>
+                  <span class="thebe_status_field"></span>
+              </div>
           </li>
-          <li class="nav-item">
+
+          <!-- <li class="nav-item">
             <a class="nav-link" href="https://www.facebook.com/designrevision"><i class="fa fa-facebook"></i></a>
           </li>
           <li class="nav-item">
@@ -75,26 +93,23 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="https://github.com/designrevision"><i class="fa fa-github"></i></a>
-          </li>
-        </ul> -->
+          </li>  -->
+        </ul>
       </div>
     </nav>
-    <div class=".container-fluid" style="width: 100%;">
+
+
+    <!-- <div class=".container-fluid" style="width: 100%;">
         <div class="container">
             <div class="row">
-                <!-- <div class="col-1">
-                    <a href = "/"><i class="fas fa-long-arrow-alt-left fa-5x" style = "margin-left: 3px; margin-right:10em; position: fixed;"></i></a>
-                </div> -->
-                <div class="col" id = "title">
 
-                </div>
-                <div class="col-1" id = "status">
-                    <p>Status: <span class="thebe_status_field"></span></p>
-                </div>
+
+
           </div>
         </div>
 
-    </div>
+    </div> -->
+
     <!-- <div class="container">
 
 	<div class="timeline-item">
@@ -153,9 +168,9 @@
 
             $$\widehat{C} = argmax_{c_j\in C} P(c_j|T)$$
 
-            <p>\(\widehat{C}\) is our estimated class, think of it as our guess of the possible class that T is.\(argmax_{c_j}\in C\) refers to selecting the most probable class out of our possible class values.</p>
+            <p>\(\widehat{C}\) is our estimated class, think of it as our guess of the possible class that T is. \(argmax_{c_j}\in C\) refers to selecting the most probable class out of our possible class values.</p>
 
-            <p>Introducing Bayes Rule:</p>
+            <h3>Introducing Bayes Rule:</h3>
             $$P(C|X) = \frac{P(X|C)P(C)}{P(X)}$$
 
 
@@ -165,11 +180,11 @@
 
             $$= argmax_{c_j\in C} \frac{P(T|c_j)P(c_j)}{P(T)}$$
 
-            <p>We can ignore P(T) since it is the same across all of our calculations</p>
+            <p>We can ignore \(P(T)\) since it is the same across all of our calculations</p>
 
             $$\widehat{C}= argmax_{c_j\in C}P(T|c_j)P(c_j)$$
 
-            <p>Since T is an instance where \(T = (x_1, x_2, x_3, ... , x_n)\)</p>
+            <p>Since \(T\) is an instance where \(T = (x_1, x_2, x_3, ... , x_n)\)</p>
 
             $$\widehat{C} = argmax_{c_j\in C} P(x_1, x_2, x_3, ... , x_n|c_j)*P(c_j)$$
 
@@ -185,12 +200,10 @@
                 <b>conditionally independant</b>
                 on the class. Rarely does this seem to exist
                 in most datasets but this assumption does not
-                impede on the model's ability to predict classes
+                impede on the model's ability to predict classes.
+                This conditional
+                independance assumption translates into the following:
             </p>
-
-
-            <p>This conditional independance assumption translates into the following:</p>
-
             $$P(x_1, x_2, x_3, ... , x_n|c_j) ≈ P(x_1|c_j)P(x_2|c_j)P(x_3|c_j)...P(x_n|c_j)$$
             $$≈\prod_{i} P(x_i|c_j)$$
 
@@ -199,7 +212,6 @@
 
             <div class="container" id = paragraph>
             <h3>Putting it all together</h3>
-            <br>
 
             <p>$$\widehat{C} = argmax_{c_j\in C}\prod_{i} P(x_i|c_j)*P(c_j)$$</p>
 
@@ -215,7 +227,7 @@
 
             </div>
         <div class="container" id = paragraph>
-        <h3>Lets try it out</h3>
+            <h3>Lets try it out</h3>
 
             <div class="table">
     		    <div class="table-header">
@@ -279,7 +291,6 @@
 
         <div class="container" id = paragraph>
         <h3>Calculating our priors and posteriors per class</h3>
-        <br>
             <div class="table">
     		    <div class="table-header">
         			<div class="header__item"><a id="name" class="filter__link" href="#">Flu</a></div>
@@ -375,6 +386,7 @@
 
             <p><b>Classification Result:</b> Our model says the patient has a cold</p>
         </div>
+
         <div class="container" id = paragraph>
 
             <h3>One Small Problem</h3>
@@ -412,13 +424,12 @@
             </p>
 
         </div>
-        <div class = "container" id = runnable>
+        <div class="container" id = paragraph>
             <h3>Smoothing</h3>
-
             <p>Firstly the most simple type of Smoothing is called Epsilon Smoothing</p>
+        </div>
 
-
-
+        <div class="container" id = paragraph>
             <h3>Python Implementation</h3>
 
             <p>Hopefully by now you can see that this model needs two components from the data:
@@ -429,11 +440,11 @@
             </p>
 
 
-        </div>
 
-    </div>
 
-            <div class = "container" id = runnable>
+
+
+
 
             <p>Firstly we'll import the required modules and prepare the data for processing</p>
              <pre data-executable="true" data-language="python"># Our imports go here
@@ -443,7 +454,7 @@ from NaiveBayes import *
             </pre>
 
         </div>
-
+    </div>
         <div class = "container" id = runnable>
              <pre data-executable="true" data-language="python"># give our csv data some headers
 def preprocess_supervised(file):
@@ -595,6 +606,18 @@ print (str(simple_accuracy*100)+"%")
 
 
 
+        <pre data-executable="true" data-language="python"></pre>
+        <pre data-executable="true" data-language="python"></pre>
+        <pre data-executable="true" data-language="python"></pre>
+        <pre data-executable="true" data-language="python"></pre>
+        <pre data-executable="true" data-language="python"></pre>
+        <pre data-executable="true" data-language="python"></pre>
+        <pre data-executable="true" data-language="python"></pre>
+
+
+
+
+</div>
 </div>
 <footer>
   <nav class="navbar navbar-expand-lg">
