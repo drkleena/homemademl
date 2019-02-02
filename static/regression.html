@@ -1,0 +1,315 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Palanquin" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Hind" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="assets/css/prism.css" rel="stylesheet"/>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+
+    <link href="assets/css/thebe_status_field.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href = "./assets/css/post.css">
+
+    <link rel = "https://cdnjs.cloudflare.com/ajax/libs/showdown/1.8.6/showdown.min.js">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- THEBELAB STUFF -->
+    <script type="text/javascript" src="https://unpkg.com/thebelab@^0.3.0"></script>
+
+    <script src="assets/js/thebe_status_field.js" type="text/javascript" ></script>
+
+    <script type="text/x-thebe-config">
+    {
+        binderOptions: {
+            repo: "drkleena/HomeMadeML-Lesson-Material",
+            ref: "master"
+        },
+            kernelOptions: {
+                name: "python3",
+            },
+        requestKernel: true
+    }
+    </script>
+
+    <script>
+        window.onload = function () {
+            thebe_place_activate_button();
+            thebe_activate_button_function();
+            thebe_activate_cells();
+        };
+        window.onscroll = function() {myFunction()};
+
+        function myFunction() {
+          var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+          var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+          var scrolled = (winScroll / height) * 100;
+          document.getElementById("myBar").style.width = scrolled + "%";
+        }
+    </script>
+</head>
+
+<body>
+
+    <div class="header">
+        <div class="progress-container">
+            <div class="progress-bar" id="myBar"></div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-light pt-4 px-0 mx-5">
+      <a class="navbar-brand" href="/">
+        Homemade ML
+      </a>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+              <div class="col-1" id = "status">
+                  <p style = "font-weight: 5px; font-size: 1rem">Status: </p>
+                  <span class="thebe_status_field"></span>
+              </div>
+          </li>
+
+          <!-- <li class="nav-item">
+            <a class="nav-link" href="https://www.facebook.com/designrevision"><i class="fa fa-facebook"></i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://dribbble.com/hisk"><i class="fa fa-dribbble"></i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/designrevision"><i class="fa fa-github"></i></a>
+          </li>  -->
+        </ul>
+      </div>
+    </nav>
+
+
+    <!-- <div class=".container-fluid" style="width: 100%;">
+        <div class="container">
+            <div class="row">
+
+
+
+          </div>
+        </div>
+
+    </div> -->
+
+    <!-- <div class="container">
+
+	<div class="timeline-item">
+		<h1></h1>
+		<p>
+
+		</p>
+	</div>
+
+	<div class="timeline-item">
+		<h1></h1>
+		<p>
+		</p>
+	</div>
+
+	<div class="timeline-item">
+		<h1></h1>
+		<p>
+		</p>
+	</div> -->
+
+
+    <div class=".container-fluid" id = "post_container" style="width: 100%;background-color:white;">
+        <div class="container" id = heading>
+            <h1>Regression and Gradient Descent</h1>
+        </div>
+
+
+    <div class = "container" id = "paragraph">
+        <h3>Predicting Continuous Labels</h3>
+        <p>Regression involves predicting a continuous value from a set of numeric attributes. Here our goal is to approximate a continuous target function through fitting a line on our training dataset. Mathematically what we are trying to do is estimate the relationship between our independant variables and our dependant variable (what we want to predict). We estimate this relationship by estimating the $\beta's$ in the equation below.
+
+$$Y = \beta_0 + \beta_1X + \beta_2X +  ...  + \beta_nX  + \epsilon$$
+
+
+Here Y is our set of dependant variable values and X is the set of our independant variables. For every atttribute in our data, there is a corresponding \(\beta\) to go along with it.
+
+Ultimately, we want to find \(\beta\)'s that correspond to the lowest error when comparing our prediction to the actual value. Based on least squares estimation, we'll be estimating our model's error based on the residual sum of squares. This looks like:
+
+$$min \sum_{i}^{N} (y_i - \hat{y_{i}})^2 = min \sum_{i}^{N} (y_i - b_0 - b_1x_ik - ... -b_kx_i)^2$$
+
+
+It is possible to solve this equation for the \(\beta\)'s we are trying to estimate, but when dealing with many attributes and large datasets, it is prone to small numerical errors. A better way is to use Gradient Descent!</p>
+    </div>
+    <div class = "container" id = "paragraph">
+        <h3>Gradient Descent</h3>
+        <p>Gradient Descent is a popular method of solving convex optimisation used by many machine learning models to tune their parameters to the most accurate ones. It is analgous to rolling a ball down a hill to find its lowest point. Here we are iteratively tuning the values of \(\beta\) to find the best residual squared error. But which way is the direction of the minimum? The answer lies with calculus! Using the derivative of our \(\beta\)'s we can tell the direction of the minimum value and iteratively nudge our values in that direction.
+        </p>
+
+        <p>As an algorithm it looks like this:</p>
+        <ol>
+            <li>Initialisation: We make a guess on our parameters</li>
+            <li>Evaluation: We calculate the error of this parameter</li>
+            <li>Termination: We decide whether to stop or continue</li>
+            <li>Update: Using an update rule we calculate the next iteration's parameter using our current parameter and loss value</li>
+            <li>Repeat: Go back to step 2</li>
+        </ol>
+
+
+    <p>Computationally what we are doing is this:</p>
+
+    $$\beta_k^{i+1} := \beta_k^i -\alpha\frac{\partial}{\partial\beta_k^i}\text{Error}(\beta_k^{i})$$
+
+    <p>By subtracting the product of the parameter's derivative and its loss we are nudging our value into the direction of the minimum. Notice when the derivative is 0 (corresponding to a minimum or maximum) we stop nudging our parameter as the whole product becomes zero. In addition, $\alpha$ is our learning rate, this value lets us experiment with different 'step sizes' when updating our \(\beta\). Larger $\alpha$ values will cause our algorithm to make bigger steps in changing our \(\beta\).These large steps may cause our algorithm to miss the minimum and never reach it.Small $\alpha$ values will cause our algorithm to take tiny steps which means we won't likely miss the minimum but means training will take a longer time. Substituting in the partial derivative with the above gradient descent equation yields this:
+    </p>
+
+    $$\beta_k^{i+1} = \beta_k^i  + \frac{2\alpha}{N}\sum_{j=1}^{N} x_{jk}(y_i - \hat{y_{i}})$$
+
+    <p>Lets implement this for a dataset with two attributes, an independant variable and a dependant variable. This means we need to find two \(\beta\)'s</p>
+
+
+    <pre data-executable="true" data-language="python">
+import pandas as pd
+import numpy as np
+import sklearn as sk
+from sklearn.datasets import make_regression
+import matplotlib.pyplot as plt
+import matplotlib
+from matplotlib import animation, rc
+from IPython import display
+%matplotlib inline
+import time
+import pylab as pl
+from IPython.display import HTML
+import matplotlib.cm as cm
+</pre>
+
+
+
+<pre data-executable="true" data-language="python">def update(b0, b1, alpha, dataset):
+
+    N = len(dataset[0])
+    xi0 = 1
+    b0_summation = sum([xi0*(dataset[1][i] - (b1*dataset[0][i] + b0)) for i in range(N)])
+
+    y_i = [b1*dataset[0][i] + b0 for i in range(N)]
+
+    b0_prime = b0 + (((2*(alpha)) / (len(dataset[0]))) * b0_summation)
+
+    b1_summation = sum([dataset[0][i]*(dataset[1][i] - (b1*dataset[0][i]+b0)) for i in range(N)])
+
+    b1_prime = b1 + (((2*(alpha)) / (len(dataset[0]))) * b1_summation)
+
+    return (b0_prime, b1_prime)
+
+
+</pre>
+
+<pre data-executable="true" data-language="python">
+def gradient_descent(epochs, b0, b1, alpha, dataset):
+
+    for i in range(epochs):
+        b0_new, b1_new = update(b0, b1, alpha, dataset)
+        b0 = b0_new
+        b1 = b1_new
+    return (b0, b1)
+</pre>
+<pre data-executable="true" data-language="python">
+def create_dataset(noise, samples):
+
+    dataset = sk.datasets.make_regression(n_samples=SAMPLES,
+    n_features=1, n_informative=1, n_targets=1,
+    bias=0.0, effective_rank=None, tail_strength=0.01, noise=NOISE, shuffle=True, coef=True, random_state=None)
+    # Plot outputs
+    return dataset
+
+def plot_dataset(dataset):
+    plt.scatter(dataset[0], dataset[1],  color='blue')
+    plt.title("{} Random Regression Data with noise = {}".format("a","b"))
+    plt.xticks()
+    plt.yticks()
+    plt.show()
+
+</pre>
+
+<pre data-executable="true" data-language="python">
+dataset=create_dataset(100,100)
+b0, b1 = gradient_descent(100, 0, -5, 0.1, dataset)
+</pre>
+
+<pre data-executable="true" data-language="python">
+def animate_plot(epochs):
+    colors = cm.rainbow(np.linspace(0, 1,epochs))
+    b0, b1 = (0,0)
+    alpha = 0.1
+
+    for i in range(epochs):
+
+        #losses.append(rss(b0,b1,dataset))
+
+        x = np.linspace(min(dataset[0]),max(dataset[0]),len(dataset[0]))
+        y = b1*x+b0
+
+        # Plot outputs
+        plt.scatter(dataset[0], dataset[1],  color='blue')
+        plt.plot(x, y, '-r', label='y={}x+{}'.format(b0,b1),color=colors[i],linewidth=2)
+        plt.legend(loc='upper left')
+        plt.grid()
+        display.clear_output(wait=True)
+        time.sleep(0.001)
+        plt.show()
+
+        b0_new, b1_new = update(b0, b1, alpha, dataset)
+        b0, b1 = b0_new, b1_new
+
+
+
+
+%config InlineBackend.figure_format = 'retina'
+animate_plot(100)
+</pre>
+
+</div>
+
+</div>
+<footer>
+  <nav class="navbar navbar-expand-lg">
+      <!-- ^^ navbar-dark bg-dark  -->
+    <div class="container">
+      <a class="navbar-brand" href="/">Homemade ML</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</footer>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/showdown/1.8.6/showdown.min.js'></script> -->
+<!-- Causes a runtime error, hangs whole launching process -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script> -->
+
+<script src="/assets/js/prism.js"></script>
+<script type="text/javascript" src="https://unpkg.com/thebelab@^0.3.0"></script>
+</body>
+</html>

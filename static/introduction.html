@@ -1,0 +1,268 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Palanquin" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Hind" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="assets/css/prism.css" rel="stylesheet"/>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+
+    <link href="assets/css/thebe_status_field.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href = "./assets/css/post.css">
+
+    <link rel = "https://cdnjs.cloudflare.com/ajax/libs/showdown/1.8.6/showdown.min.js">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- THEBELAB STUFF -->
+    <script type="text/javascript" src="https://unpkg.com/thebelab@^0.3.0"></script>
+
+    <script src="assets/js/thebe_status_field.js" type="text/javascript" ></script>
+
+    <script type="text/x-thebe-config">
+    {
+        binderOptions: {
+            repo: "drkleena/HomeMadeML-Lesson-Material",
+            ref: "master"
+        },
+            kernelOptions: {
+                name: "python3",
+            },
+        requestKernel: true
+    }
+    </script>
+
+    <script>
+        window.onload = function () {
+            thebe_place_activate_button();
+            thebe_activate_button_function();
+            thebe_activate_cells();
+        };
+        window.onscroll = function() {myFunction()};
+
+        function myFunction() {
+          var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+          var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+          var scrolled = (winScroll / height) * 100;
+          document.getElementById("myBar").style.width = scrolled + "%";
+        }
+    </script>
+</head>
+
+<body>
+
+    <div class="header">
+        <div class="progress-container">
+            <div class="progress-bar" id="myBar"></div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-light pt-4 px-0 mx-5">
+      <a class="navbar-brand" href="/">
+        Homemade ML
+      </a>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+              <div class="col-1" id = "status">
+                  <p style = "font-weight: 5px; font-size: 1rem">Status: </p>
+                  <span class="thebe_status_field"></span>
+              </div>
+          </li>
+
+          <!-- <li class="nav-item">
+            <a class="nav-link" href="https://www.facebook.com/designrevision"><i class="fa fa-facebook"></i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://dribbble.com/hisk"><i class="fa fa-dribbble"></i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/designrevision"><i class="fa fa-github"></i></a>
+          </li>  -->
+        </ul>
+      </div>
+    </nav>
+
+
+    <!-- <div class=".container-fluid" style="width: 100%;">
+        <div class="container">
+            <div class="row">
+
+
+
+          </div>
+        </div>
+
+    </div> -->
+
+    <!-- <div class="container">
+
+	<div class="timeline-item">
+		<h1></h1>
+		<p>
+
+		</p>
+	</div>
+
+	<div class="timeline-item">
+		<h1></h1>
+		<p>
+		</p>
+	</div>
+
+	<div class="timeline-item">
+		<h1></h1>
+		<p>
+		</p>
+	</div> -->
+
+
+    <div class=".container-fluid" id = "post_container" style="width: 100%;background-color:white;">
+
+    <div class = "container" id = "paragraph">
+        <h3>Welcome!</h3>
+        <p>Welcome to Homemade Machine Learning! Here you will find tutorials, explanations and explorations into machine learning and data science topics. This project is here to help anyone with a background in software engineering get a foundational footing on how machine learning models work. Too often, tutorials on the subject fail to strike a balance between the theory and its application, leaving many with either a black box view on ML models or with a math jargon induced headache. Through a couple of chapters, you will find ML concepts broken down into its theory and then immedietly applied into practical implementations.</p>
+    </div>
+
+
+    <div class = "container" id = "paragraph">
+        <h3>Usage</h3>
+        <p>Throughout the site you'll find embedded Jupyter Notebooks.
+            Wait for the status field on the top right corner to turn
+            green and say "ready", once it is ready you are able to run
+            cells as if this was a real Jupyter Notebook. This means all cells are linked together and flow linearly like normal.
+            Running functions in their own cell will not give you an output,
+            rest assured this is normal and no output means the function will be able to be used throughout the notebook.
+            Here is a sample!
+        </p>
+        <pre data-executable="true" data-language="python">print ("Hello World!")
+        </pre>
+        <pre data-executable="true" data-language="python">def myfunc():
+    return "wowy jupyter notebooks in html are cool!"
+        </pre>
+        <pre data-executable="true" data-language="python">myfunc()
+        </pre>
+    </div>
+
+
+    <div class = "container" id = "paragraph">
+        <h3>Lets get started!</h3>
+        <p>What does it mean for a machine to <b>learn</b> anyways?
+        Lets begin with data. Our
+        increasingly connected society means
+        more information measured and transmitted at any given second.
+        In this sea of information lies valuable insight and this is
+        where we step in. Data scientists and machine learning engineers are
+        tasked with the mission to gain a peek into the patterns that underly
+        the mountains of data in our lap. Ultimately we want to use this data and
+        the underlying patterns to solve cool problems. Want to tell which images
+        of tumors are canerous? Lets train a classifier on the data! Lets see if we
+        can predict cancer early and more efficiently than any doctor. Want to identify
+        objects within an image? Be able to safely navigate a car down a street through
+        image and sensor data? All solvable with today's state of the art methods and most
+        importantly all able to be done on your computer at home.
+        </p>
+    </div>
+
+
+    <div class = "container" id = "paragraph">
+        <h3>Instances</h3>
+        <p>An instance is an elementary unit of our data.
+            An instance is a single row in any table or data
+            collection which is made of a set of attribute values.
+            Lets use some data to demonstrate what we're talking about.
+        </p>
+        <pre data-executable="true" data-language="python">
+# instance demonstration
+%cd Chapter-1/Introduction
+import pandas as pd
+table = pd.read_csv("./toy.csv")
+def display_first_instance(table):
+    return table[0:1]
+display_first_instance(table)
+</pre>
+        <p>An instance is an independant collection of attribute values,
+        here our first instance is made of sunny, hot, high, False and no.
+        These are sometimes refered to as 'exemplars'.
+        </p>
+</div>
+
+
+<div class = "container" id = "paragraph">
+<h3>Attributes</h3>
+As you have seen before, an attribute represents an aspect to describe an instance. These are realised in terms of their attribute values. Here our table is made up of 4 attributes outlook, temperature, humidity and windy. The last one 'play' is special, more on this soon. Attributes can also be refered to as 'features'.
+</div>
+<div class = "container" id = "paragraph">
+<h3>Concepts</h3>
+These are the things we are trying to learn and predict from our data. In the above instance, the last attribute 'Play' is what we are trying to predict, this is called a label or class. In this case we have instances paired with a class label, this is an example of a supervised learning problem, where we have instances and their correct identification. When we are trying to predict the discrete class of an instance, we are trying to <b>classify</b> the instance.
+</div>
+
+<div class = "container" id = "paragraph">
+<h3>Data Types</h3>
+<b>Nominal</b>
+</br>
+<p>Nominal values are distinct labels or names. The above table contained attributes that had only distinct labels making them nominal. There is no inherent ordering or scale for these values. Things that are nominal: Gender and age (even though it is numeric, there exists an upper bound - no one lives to 1000, so we can safely assume a fixed number of ages)</p>
+
+<b>Ordinal</b>
+</br>
+<p>Here we have either an implicit or explicit ordering. In the example above our attribute 'Temperature' had the values either hot, mild or cool. From our inherent understanding of temperature we can tell that hot is hotter than mild that is in turn hotter than cool. We can say that hot > mild > cool. Here addition and subtraction along with the other mathematical operations don't make sense. In some cases Ordinal and Nominal attribute values can be confused, sometimes it isn't immidietly clear.</p>
+
+<b>Continuous</b>
+</br>
+<p>Continuous values represent real numbers with an explicit upper bound. Measurements such as distance fall into this category. All of our math operations here are allowed.</p>
+</div>
+
+
+
+
+
+
+
+
+</div>
+
+
+
+<footer>
+  <nav class="navbar navbar-expand-lg">
+      <!-- ^^ navbar-dark bg-dark  -->
+    <div class="container">
+      <a class="navbar-brand" href="/">Homemade ML</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</footer>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/showdown/1.8.6/showdown.min.js'></script> -->
+<!-- Causes a runtime error, hangs whole launching process -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script> -->
+
+<script src="/assets/js/prism.js"></script>
+<script type="text/javascript" src="https://unpkg.com/thebelab@^0.3.0"></script>
+</body>
+</html>
