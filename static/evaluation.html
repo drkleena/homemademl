@@ -47,19 +47,39 @@
         thebe_activate_button_function();
         thebe_activate_cells();
       };
+
+
+
+      window.onscroll = function() {myFunction()};
+
+      function myFunction() {
+        var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        var scrolled = (winScroll / height) * 100;
+        document.getElementById("myBar").style.width = scrolled + "%";
+      }
     </script>
+
+
+
+
 
 
 
 </head>
 
 <body>
-
+    <div class="header">
+        <div class="progress-container">
+            <div class="progress-bar" id="myBar"></div>
+        </div>
+    </div>
 
     <nav class="navbar navbar-expand-lg navbar-light pt-4 px-0 mx-5">
       <a class="navbar-brand" href="/">
         Homemade ML
       </a>
+
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -67,12 +87,15 @@
         <ul class="navbar-nav">
 
         </ul>
-
-        <!-- <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="https://twitter.com/DesignRevision"><i class="fa fa-twitter"></i></a>
+              <div class="col-1" id = "status">
+                  <p style = "font-weight: 5px; font-size: 1rem">Status: </p>
+                  <span class="thebe_status_field"></span>
+              </div>
           </li>
-          <li class="nav-item">
+
+          <!-- <li class="nav-item">
             <a class="nav-link" href="https://www.facebook.com/designrevision"><i class="fa fa-facebook"></i></a>
           </li>
           <li class="nav-item">
@@ -80,23 +103,13 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="https://github.com/designrevision"><i class="fa fa-github"></i></a>
-          </li>
-        </ul> -->
+          </li>  -->
+        </ul>
       </div>
     </nav>
     <div class=".container-fluid" style="width: 100%;">
         <div class="container">
-            <div class="row">
-                <!-- <div class="col-1">
-                    <a href = "/"><i class="fas fa-long-arrow-alt-left fa-5x" style = "margin-left: 3px; margin-right:10em; position: fixed;"></i></a>
-                </div> -->
-                <div class="col" id = "title">
 
-                </div>
-                <div class="col-1" id = "status">
-                    <p>Status: <span class="thebe_status_field"></span></p>
-                </div>
-          </div>
         </div>
 
     </div>
@@ -125,7 +138,7 @@
             a meaningful and demonstrable way then it might as well be
             thrown in the trash. Throughout this series, we will take
             ourselfs through a journey of assesing a model under
-            various fascets of evaluation and critically analyse these different methods</p>
+            various fascets of evaluation and critically analyse these different methods.</p>
         </div>
 
 
@@ -153,27 +166,48 @@
             with no replacement and use this as train and the remaining instances as test.
             This leads to the testing dataset to be 'held out'. What we want to do is
             take a random selection of x% for training and 1-x% for testing.</p>
+            <pre data-executable="true" data-language="python">%cd Chapter-1/Naive-Bayes
+import pandas as pd
+from collections import defaultdict as dd
+import random
+random.seed(3000)
+import numpy as np
+from NaiveBayes import *</pre>
+<pre data-executable="true" data-language="python">
+def preprocess(file, normal = True):
+    if(normal):
+        df = pd.read_csv("./datasets/"+file+".csv",header=None)
+        unnamed = df.columns[len(df.columns)-1]
+        df.rename(columns={unnamed:'class'},inplace=True)
+    return df
+</pre>
+
+
+
 
             <pre data-executable="true" data-language="python">def get_train_test_split(df, split):
-    train_percent, test_percent = split[0], split[1]
-
-    # randomise our dataset and reset the indexes
+    train_percent = split[0]
+    test_percent = split[1]
     df_shuffled = df.sample(frac=1).reset_index(drop=True)
-
-    #find the indexes we want to slice
-    train_portion_index = int(len(df_shuffled.index)/train_percent)
-
+    train_portion_index = int(len(df_shuffled.index)*train_percent)
     test_portion_index = train_portion_index+1
-
-    #slice the instances according to the split ratio
     train_portion = df_shuffled[:train_portion_index].reset_index(drop=True)
-
     test_portion = df_shuffled[test_portion_index-1:].reset_index(drop=True)
+    return train_portion, test_portion</pre>
+<p>Run this snippet to see the accuracy of our previous Naive Bayes model. Try choosing different values for TRAIN_PERCENT.</p>
+<pre data-executable="true" data-language="python">TRAIN = 0.8
+TEST  = 1.0 - TRAIN
 
-    return train_portion, test_portion
+holdout_ratio = (TRAIN, TEST)
 
-            </pre>
+car_dataset = preprocess("car")
+train, test = get_train_test_split(car_dataset,holdout_ratio)
+nb_holdout = NaiveBayes(train)
+results = nb_holdout.predict(test)
 
+#lets see the accuracy
+print ("SPLIT: {:f}/{:f} \nACCURACY: {}%".format(TRAIN*100,TEST*100,np.mean(results['predicted'] == results['class'])*100))
+</pre>
 
             <p><b>We're done now right?</b>
             </br>
@@ -196,19 +230,24 @@
         </p>
 
         <pre data-executable="true" data-language="python">def repeated_sub_sampling(n, df, split):
-        runs = []
-        # returns the average of n holdout runs with the same split
-        for run in range (n):
-            train, test = get_train_test_split(df, split)
-            nb_holdout = NaiveBayes(train)
-            results = nb_holdout.predict(test)
-            simple_accuracy = np.mean(results["class"]==results["predicted"])
-            runs.append(simple_accuracy)
-        print (runs)
-        return np.mean(runs)
-        </pre>
-    </div>
+    runs = []
+    # returns the average of n holdout runs with the same split
+    for run in range (n):
+        train, test = get_train_test_split(df, split)
+        nb_holdout = NaiveBayes(train)
+        results = nb_holdout.predict(test)
+        simple_accuracy = np.mean(results["class"]==results["predicted"])
+        runs.append(simple_accuracy)
+        print ("Run #{} {:f}".format(run+1,simple_accuracy*100))
+    return np.mean(runs)</pre>
 
+
+
+
+    <pre data-executable="true" data-language="python">RUNS = 5
+print ("Final Accuracy: {:f}%".format(repeated_sub_sampling(RUNS, car_dataset, (TRAIN,TEST))*100))</pre>
+
+</div>
     <div class="container" id = paragraph>
         <h3>Cross Validation</h3>
         <p>Cross validation allows us to test the skill of a model on unseen data.
@@ -219,9 +258,9 @@
         <ul>
             <li>Shuffle the dataset</li>
             <li>Split the dataset in to k unique groups</li>
-            <li>For each group that we have split our dataset into:</li>
+            <li>Iteratively: for each k groups</li>
                 <ul>
-                    <li>Take the group as our training set</li>
+                    <li>Take a group as our test set, take the rest k-1 groups as training set</li>
                     <li>Train the model on train, and test on test</li>
                     <li>Get a model evaluation score (eg. simple accuracy) and discard the model</li>
                 </ul>
@@ -229,13 +268,82 @@
         </ul>
         </p>
 
+    <pre data-executable="true" data-language="python">""" return folds takes the dataframe and merges the other k-1
+	groups together, returns both the train group and the test group
+"""
+def return_folds(dfs, index):
+    dfs_copy = list(dfs)
+    test = dfs_copy.pop(index)
+    train  = dfs_copy
+    return (train,test)
+
+
+def cross_validation(df, kfolds):
+
+    df = df.sample(frac=1).reset_index(drop=True)
+
+    accuracy_over_folds = []
+    dfs = np.array_split(df, kfolds)
 
 
 
+    for group_index in range(len(dfs)):
+
+        #training
+        train, test = return_folds(dfs, group_index)
+        train = pd.concat(train, axis=0, join='outer', ignore_index=True)
+        train = train.reset_index(drop=True)
+        test = test.reset_index(drop=True)
+        nb = NaiveBayes(train)
+        predictions = nb.predict(test)
+
+        # accuracy
+        simple_accuracy = np.mean(predictions["class"]==predictions["predicted"])
+        accuracy_over_folds.append(simple_accuracy)
+        print("Computing CV- FOLD {}: {}%".format(group_index+1, 100*simple_accuracy))
+
+    return np.mean(accuracy_over_folds)</pre>
+
+<pre data-executable="true" data-language="python">print ("Final Accuracy: {:f}".format(cross_validation(car_dataset,10)*100))</pre>
 
 
 
+<h4>Choosing k</h4>
+<p><b>Large k </b></p>
+<p>Large k values will be a more accurate representation of your model's skill but will take longer to compute.
+As we increase k, we'll approach the most optimal scenario called 'leave one out' cross validation where
+k equals the number of instances in our dataset. This means every instance gets used as a test set
+exactly once which maximises our training set.</p>
 
+<p><b>Small k </b></p>
+<p>
+Small k are quicker to compute but don't provide an accurate representation of the model's
+skill and are prone to higher variance.This method of evaluation greatly decreases our
+evaluation bias and variance. Evaluation bias being the propensity for our evaluation technique to
+systematically over or under estimate our
+model's performance, and evaluation variance being the spread in our estimations of accuracy over
+independant trials.
+</p>
+</div>
+
+    <footer>
+      <nav class="navbar navbar-expand-lg">
+          <!-- ^^ navbar-dark bg-dark  -->
+        <div class="container">
+          <a class="navbar-brand" href="/">Homemade ML</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+              <!-- <li class="nav-item">
+                <a class="nav-link" href="#">About</a>
+              </li> -->
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </footer>
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
 <!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/showdown/1.8.6/showdown.min.js'></script> -->
