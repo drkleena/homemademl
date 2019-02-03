@@ -130,8 +130,6 @@
 		<p>
 		</p>
 	</div> -->
-
-
     <div class=".container-fluid" id = "post_container" style="width: 100%;background-color:white;">
         <div class="container" id = heading>
             <h1>Regression and Gradient Descent</h1>
@@ -140,7 +138,7 @@
 
     <div class = "container" id = "paragraph">
         <h3>Predicting Continuous Labels</h3>
-        <p>Regression involves predicting a continuous value from a set of numeric attributes. Here our goal is to approximate a continuous target function through fitting a line on our training dataset. Mathematically what we are trying to do is estimate the relationship between our independant variables and our dependant variable (what we want to predict). We estimate this relationship by estimating the $\beta's$ in the equation below.
+        <p>Regression involves predicting a continuous value from a set of numeric attributes. Here our goal is to approximate a continuous target function through fitting a line on our training dataset. Mathematically what we are trying to do is estimate the relationship between our independant variables and our dependant variable (what we want to predict). We estimate this relationship by estimating the \(\beta\)'s in the equation below.
 
 $$Y = \beta_0 + \beta_1X + \beta_2X +  ...  + \beta_nX  + \epsilon$$
 
@@ -173,7 +171,7 @@ It is possible to solve this equation for the \(\beta\)'s we are trying to estim
 
     $$\beta_k^{i+1} := \beta_k^i -\alpha\frac{\partial}{\partial\beta_k^i}\text{Error}(\beta_k^{i})$$
 
-    <p>By subtracting the product of the parameter's derivative and its loss we are nudging our value into the direction of the minimum. Notice when the derivative is 0 (corresponding to a minimum or maximum) we stop nudging our parameter as the whole product becomes zero. In addition, $\alpha$ is our learning rate, this value lets us experiment with different 'step sizes' when updating our \(\beta\). Larger $\alpha$ values will cause our algorithm to make bigger steps in changing our \(\beta\).These large steps may cause our algorithm to miss the minimum and never reach it.Small $\alpha$ values will cause our algorithm to take tiny steps which means we won't likely miss the minimum but means training will take a longer time. Substituting in the partial derivative with the above gradient descent equation yields this:
+    <p>By subtracting the product of the parameter's derivative and its loss we are nudging our value into the direction of the minimum. Notice when the derivative is 0 (corresponding to a minimum or maximum) we stop nudging our parameter as the whole product becomes zero. In addition, \(\alpha\) is our learning rate, this value lets us experiment with different 'step sizes' when updating our \(\beta\). Larger \(\alpha\) values will cause our algorithm to make bigger steps in changing our \(\beta\).These large steps may cause our algorithm to miss the minimum and never reach it.Small \(\alpha\) values will cause our algorithm to take tiny steps which means we won't likely miss the minimum but means training will take a longer time. Substituting in the partial derivative with the above gradient descent equation yields this:
     </p>
 
     $$\beta_k^{i+1} = \beta_k^i  + \frac{2\alpha}{N}\sum_{j=1}^{N} x_{jk}(y_i - \hat{y_{i}})$$
@@ -181,8 +179,7 @@ It is possible to solve this equation for the \(\beta\)'s we are trying to estim
     <p>Lets implement this for a dataset with two attributes, an independant variable and a dependant variable. This means we need to find two \(\beta\)'s</p>
 
 
-    <pre data-executable="true" data-language="python">
-import pandas as pd
+    <pre data-executable="true" data-language="python">import pandas as pd
 import numpy as np
 import sklearn as sk
 from sklearn.datasets import make_regression
@@ -195,7 +192,10 @@ import time
 import pylab as pl
 from IPython.display import HTML
 import matplotlib.cm as cm
-</pre>
+%config InlineBackend.figure_format = 'retina'
+
+SAMPLES = 100
+NOISE = 20</pre>
 
 
 
@@ -250,8 +250,7 @@ dataset=create_dataset(100,100)
 b0, b1 = gradient_descent(100, 0, -5, 0.1, dataset)
 </pre>
 
-<pre data-executable="true" data-language="python">
-def animate_plot(epochs):
+<pre data-executable="true" data-language="python">def animate_plot(epochs):
     colors = cm.rainbow(np.linspace(0, 1,epochs))
     b0, b1 = (0,0)
     alpha = 0.1
@@ -259,7 +258,8 @@ def animate_plot(epochs):
     for i in range(epochs):
 
         #losses.append(rss(b0,b1,dataset))
-
+        b0_new, b1_new = update(b0, b1, alpha, dataset)
+        b0, b1 = b0_new, b1_new
         x = np.linspace(min(dataset[0]),max(dataset[0]),len(dataset[0]))
         y = b1*x+b0
 
@@ -272,15 +272,12 @@ def animate_plot(epochs):
         time.sleep(0.001)
         plt.show()
 
-        b0_new, b1_new = update(b0, b1, alpha, dataset)
-        b0, b1 = b0_new, b1_new
 
 
 
 
 %config InlineBackend.figure_format = 'retina'
-animate_plot(100)
-</pre>
+animate_plot(10)</pre>
 
 </div>
 
